@@ -34,7 +34,7 @@ while true; do
         # Handle the case when mosquitto_sub fails
         echo "Failed to subscribe to MQTT topic"
     fi
-done
+done;
 
 # Close the serial port
 exec 3>&-
