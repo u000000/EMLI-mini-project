@@ -6,14 +6,14 @@
 // 2022-03-24, Kjeld Jensen, First version
 
 // Configuration
-#define WIFI_SSID       "EMLI_TEAM_XX"
-#define WIFI_PASSWORD    ""
+#define WIFI_SSID       "EMLI-TEAM-17"
+#define WIFI_PASSWORD    "emli17emli17"
 
-#define MQTT_SERVER      "io.adafruit.com"
+#define MQTT_SERVER      "192.168.10.1"
 #define MQTT_SERVERPORT  1883 
-#define MQTT_USERNAME    ""
-#define MQTT_KEY         ""
-#define MQTT_TOPIC       "/feeds/count"  
+#define MQTT_USERNAME    "emli"
+#define MQTT_KEY         "raspberry"
+#define MQTT_TOPIC       "/trigger/pressure_plate"  
 
 // wifi
 #include <ESP8266WiFiMulti.h>
@@ -118,12 +118,14 @@ void setup()
 
 void publish_data()
 {
-  char payload[10];
-  sprintf (payload, "%ld", count);
+  char payload[10] = "triggered";
+  //sprintf (payload, "%ld", 1);
   count = 0;
   Serial.print(millis());
   Serial.print(" Publishing: ");
-  Serial.println(payload);
+  Serial.print(payload);
+  Serial.print(" Topic: ");
+  Serial.println(MQTT_TOPIC);
 
   Serial.print(millis());
   Serial.println(" Connecting...");
@@ -145,18 +147,23 @@ void publish_data()
 
 void loop()
 {
-    if (millis() - prev_post_time >= PUBLISH_INTERVAL)
+    if (count >= 1)
     {
       prev_post_time = millis();
       publish_data();
     }
+      
+    //if (millis() - prev_post_time >= PUBLISH_INTERVAL)
+    //{
+    //  prev_post_time = millis();
+    //  publish_data();
+    //}
    
-    if (millis() - prev_debug_time >= DEBUG_INTERVAL)
-    {
-      prev_debug_time = millis();
-      Serial.print(millis());
-      Serial.print(" ");
-      Serial.println(count);
-    }
+    //if (millis() - prev_debug_time >= DEBUG_INTERVAL)
+    //{
+    //  prev_debug_time = millis();
+    //  Serial.print(millis());
+    //  Serial.print(" ");
+    //  Serial.println(count);
+    //}
 }
-
