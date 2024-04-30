@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the serial port and baud rate
-serial_port="/dev/ttyUSB0"
+serial_port="/dev/ttyACM0"
 baud_rate="115200"
 
 # Open the serial port
