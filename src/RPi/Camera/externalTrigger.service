@@ -1,0 +1,10 @@
+[Unit]
+Description=ExternalTrigger MQTT reciever
+After=mosquitto.service
+
+[Service]
+Type=simple
+ExecStart=/home/emli/EMLI-mini-project/src/RPi/Camera/external_trigger.sh
+
+[Install]
+WantedBy=multi-user.target
