@@ -2,7 +2,8 @@
 
 #get string parameter
 TRIGGER=${1:-"External"}
-SAVEPATH=${2:-"/home/emli/webcam/"}
+SAVEPATH=${2:-"/var/www/html/images/"}
+SUBFOLDERDATE=${3:-true}
 
 echo "Taking photo..."
 
@@ -13,10 +14,10 @@ DATE_STRING=$(date)
 DATE=$(date -d "$DATE_STRING" +"%Y-%m-%d")
 
 #check if $2 is default or not
-if [ "$SAVEPATH" == "/home/emli/webcam-temp/" ]; then
-  FOLDER="/home/emli/webcam-temp/"
-else
+if [ "$SUBFOLDERDATE" == true ]; then
   FOLDER="$SAVEPATH$DATE/"
+else
+  FOLDER="$SAVEPATH"
 fi
 
 #make the directory called $DATE

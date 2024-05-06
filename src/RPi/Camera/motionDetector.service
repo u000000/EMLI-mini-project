@@ -1,0 +1,9 @@
+[Unit]
+Description=MotionDetector for wildlife camera
+
+[Service]
+Type=simple
+ExecStart=/home/emli/EMLI-mini-project/src/RPi/Camera/motion_detect.sh
+
+[Install]
+WantedBy=multi-user.target

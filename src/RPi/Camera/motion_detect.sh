@@ -14,9 +14,7 @@ firstimage=true
 while true
 do
     # take a picture
-    /home/emli/EMLI-mini-project/src/RPi/Camera/take_photo.sh Motion $directory
-
-    
+    /home/emli/EMLI-mini-project/src/RPi/Camera/take_photo.sh Motion $directory false
 
     if [ "$firstimage" = true ]; then
         firstimage=false
@@ -42,8 +40,8 @@ do
             json1=${image1::-4}".json"
             #from json read the Create Date
             create_date=$(cat $json1 | grep "Create Date" | awk '{print $3}' | sed 's/\"//g')
-            cp $image1 /home/emli/webcam/$create_date
-            cp $json1 /home/emli/webcam/$create_date
+            cp $image1 /var/www/html/images/$create_date
+            cp $json1 /var/www/html/images/$create_date
 
         fi
     
