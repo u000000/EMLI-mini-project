@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #get string parameter
-TRIGGER=$1
+TRIGGER=${1:-"External"}
+SAVEPATH=${2:-"/home/emli/webcam/"}
 
 echo "Taking photo..."
 
@@ -11,7 +12,12 @@ DATE_STRING=$(date)
 
 DATE=$(date -d "$DATE_STRING" +"%Y-%m-%d")
 
-FOLDER="/home/emli/webcam/$DATE/"
+#check if $2 is default or not
+if [ "$SAVEPATH" == "/home/emli/webcam-temp/" ]; then
+  FOLDER="/home/emli/webcam-temp/"
+else
+  FOLDER="$SAVEPATH$DATE/"
+fi
 
 #make the directory called $DATE
 mkdir -p $FOLDER
