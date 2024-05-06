@@ -1,0 +1,1 @@
+time sync https://vitux.com/how-to-install-ntp-server-and-client-on-ubuntu/
