@@ -16,4 +16,11 @@ CREATE TABLE wifi_signal (
 );
 ```
 
+setup the service to save link quality in mysql database.
+```bash
+sudo ln -s /home/drone/EMLI-mini-project/src/RPi/Drone/saveLinkQualityToWildCam.service /etc/systemd/system/saveLinkQualityToWildCam.service 
 
+sudo systemctl start saveLinkQualityToWildCam
+
+sudo systemctl enable saveLinkQualityToWildCam
+```

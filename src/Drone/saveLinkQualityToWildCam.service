@@ -1,0 +1,11 @@
+[Unit]
+Description=When connected to a wifi on if=wlo1 log the link quality in the mysql database 
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/home/drone/EMLI-mini-project/src/RPi/Drone/save_link_quality.sh
+
+[Install]
+WantedBy=multi-user.target
