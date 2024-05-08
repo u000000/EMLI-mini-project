@@ -3,6 +3,7 @@
 # Set the path to the directory where the images will be stored
 directory="/home/emli/webcam-temp/"
 symlinkdir=${1:-"/home/emli/webcam/"}
+symlinklogdir=${2:-"/home/emli/webcam_log/"}
 
 rm -rf $directory
 mkdir -p $directory
@@ -19,6 +20,7 @@ do
 
     if [ "$firstimage" = true ]; then
         firstimage=false
+        sleep 3
         continue
     else
         #read jpg files sorted by date newest first
@@ -49,9 +51,12 @@ do
             cp $dirjson1 /var/www/html/images/$create_date
 
             #make symlink from each copied files into /home/emli/webcam/
-            mkdir -p /home/emli/webcam/$create_date
-            ln -s /var/www/html/images/$create_date/$image1 /home/emli/webcam/$create_date
-            ln -s /var/www/html/images/$create_date/$json1 /home/emli/webcam/$create_date
+            mkdir -p $symlinkdir$create_date
+            mkdir -p $symlinklogdir$create_date
+            ln -s /var/www/html/images/$create_date/$image1 $symlinkdir$create_date
+            ln -s /var/www/html/images/$create_date/$json1 $symlinkdir$create_date
+            ln -s /var/www/html/images/$create_date/$image1 $symlinklogdir$create_date
+            ln -s /var/www/html/images/$create_date/$json1 $symlinklogdir$create_date
 
 
 

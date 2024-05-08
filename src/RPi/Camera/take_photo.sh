@@ -5,6 +5,7 @@ TRIGGER=${1:-"External"}
 SAVEPATH=${2:-"/var/www/html/images/"}
 SUBFOLDERDATE=${3:-true}
 SYMLINK=${4:-""}
+SYMLINKLOG=${5:-""}
 
 echo "Taking photo..."
 
@@ -17,14 +18,20 @@ DATE=$(date -d "$DATE_STRING" +"%Y-%m-%d")
 #check if $3 is true
 if [ "$SUBFOLDERDATE" == true ]; then
   FOLDER="$SAVEPATH$DATE/"
+
+  #add $DATE to symlink if it is not empty and $3 is true
+  if [ ! -z "$SYMLINK" ]; then
+    SYMLINK="$SYMLINK$DATE/"
+  fi
+
+  #add $DATE to symlink if it is not empty and $3 is true
+  if [ ! -z "$SYMLINKLOG" ]; then
+    SYMLINKLOG="$SYMLINKLOG$DATE/"
+  fi
 else
   FOLDER="$SAVEPATH"
 fi
 
-#add $DATE to symlink if it is not empty and $3 is true
-if [ ! -z "$SYMLINK" ] && [ "$SUBFOLDERDATE" == true ]; then
-  SYMLINK="$SYMLINK$DATE/"
-fi
 
 #make the directory called $DATE
 mkdir -p $FOLDER
@@ -70,7 +77,11 @@ if [ ! -z "$SYMLINK" ]; then
   mkdir -p $SYMLINK
   ln -s $FOLDER$IMAGENAME$IMAGETYPE $SYMLINK$IMAGENAME$IMAGETYPE
   ln -s $FOLDER$IMAGENAME$SIDECARTYPE $SYMLINK$IMAGENAME$SIDECARTYPE
+  mkdir -p $SYMLINKLOG
+  ln -s $FOLDER$IMAGENAME$IMAGETYPE $SYMLINKLOG$IMAGENAME$IMAGETYPE
+  ln -s $FOLDER$IMAGENAME$SIDECARTYPE $SYMLINKLOG$IMAGENAME$SIDECARTYPE
   echo "Created symbolic link at $SYMLINK$IMAGENAME$IMAGETYPE"
+  echo "Created symbolic link at $SYMLINKLOG$IMAGENAME$IMAGETYPE"
 fi
 
 exit 0
