@@ -7,6 +7,6 @@ do
   if [ "$TRIGGER" == "triggered" ]; then
     echo "triggered"
     #take a picture
-    /home/emli/EMLI-mini-project/src/RPi/Camera/take_photo.sh External
+    /home/emli/EMLI-mini-project/src/RPi/Camera/take_photo.sh External /var/www/html/images/ true /home/emli/webcam/
   fi
 done
