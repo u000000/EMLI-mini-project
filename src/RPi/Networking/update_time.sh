@@ -2,30 +2,13 @@
 
 while true; do
 
-    macToIgnore="bc:ff:4d:40:9e:49"
-    #see if any others in sudo iw dev wlan0 station dump | grep Station
-    macs=$(iw dev wlan0 station dump | grep Station | awk '{print $2}')
-    
-    macDroneFound=""
-    ipOfDrone=""
-    for mac in $macs; do
-        if [ "$mac" != "$macToIgnore" ]; then
-            macDroneFound=$mac
-            break
-        fi
-    done
+    ipOfDrone=$(bash /home/emli/EMLI-mini-project/src/RPi/Networking/get_drone_ip.sh)
 
-    #check if no mac was found
-    if [ -z "$macDroneFound" ]; then
-        echo "No drone found"
-        sleep 1
-        continue
+    #if not "No drone found"
+    if [ "$ipOfDrone" != "No drone found" ]; then
+        #update the time
+        ntpdate $ipOfDrone
     fi
-
-    ipOfDrone=$(arp -n | grep $macDroneFound | awk '{print $1}')
-
-    #set time from ntp server on drone
-    ntpdate $ipOfDrone
 
     sleep 1
 done
