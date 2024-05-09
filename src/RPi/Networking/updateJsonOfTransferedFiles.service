@@ -1,0 +1,11 @@
+[Unit]
+Description=Writing to json of files that has been moved to the drone.
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/home/emli/EMLI-mini-project/src/RPi/Networking/update_rsync_json.sh
+
+[Install]
+WantedBy=multi-user.target

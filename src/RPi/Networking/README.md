@@ -8,3 +8,12 @@ sudo systemctl start updateTimeFromDrone
 
 sudo systemctl enable updateTimeFromDrone
 ```
+
+same for writing to jsons whhen rsynced
+```bash
+sudo ln -s /home/emli/EMLI-mini-project/src/RPi/Networking/updateJsonOfTransferedFiles.service /etc/systemd/system/updateJsonOfTransferedFiles.service 
+
+sudo systemctl start updateJsonOfTransferedFiles
+
+sudo systemctl enable updateJsonOfTransferedFiles
+```
