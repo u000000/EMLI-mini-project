@@ -46,6 +46,11 @@ IMAGETYPE=".jpg"
 SIDECARTYPE=".json"
 # the size of the screenshot to take
 rpicam-jpeg -o $FOLDER$IMAGENAME$IMAGETYPE --width 640 --height 480 -t 1
+#check if the exit status of last command is not 0
+if [ $? -ne 0 ]; then
+  echo "Could not acquire camera image. Exiting..."
+  exit 1
+fi
 
 echo "Saved new file at $FOLDER$IMAGENAME$IMAGETYPE"
 
