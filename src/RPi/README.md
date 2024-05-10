@@ -1,1 +1,5 @@
-time sync https://vitux.com/how-to-install-ntp-server-and-client-on-ubuntu/
+Setup log using rsyslog in /etc/rsyslog.conf
+```bash
+#add rule for facility local7
+local7.*    /var/www/html/log.log
+```
