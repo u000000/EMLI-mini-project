@@ -1,28 +1,35 @@
 #!/bin/bash
 
-img64=$(base64 -w 0 /home/u000000/2_Semester/EMLI-mini-project/src/RPi/Cloud/2024-05-06/150112_851.jpg)
+directory="${1:-"/home/u000000/2_Semester/EMLI-mini-project/src/Cloud"}"
+model_version="${2:-"llava:7b"}"
 
-output=$(curl http://localhost:11434/api/generate -d '{ "model": "llava", "prompt":"What is in this picture?", "images": ["'$img64'"]}')
+ollama run $model_version &
 
-echo $output
+perform_annotation() {
+    IMAGENAME=$1
+    SIDECARTYPE=".json"
 
+    img64=$(base64 -w 0 $IMAGENAME)
 
-# perform_annotation() {
-#     IMAGENAME="$1"
-#     SIDECARTYPE=".json"
+    output=$(curl http://localhost:11434/api/generate -d '{ "model": "llava", "prompt":"Describe the picture in one sentence", "images": ["'$img64'"]}')
 
-#     output=$(ollama run llava:${ollama_model_version} "describe $IMAGENAME")
+    if [ $? -eq 0 ]; then
+        final_output=$(echo $output | jq -r '.response' | tr -d '\n')
 
-#     if [ $? -eq 0 ]; then
-#         echo "  \"Annotation\": {\"Source\": \"Ollama:$ollama_model_version\", \"Test\": \"$output\"}," >> $FOLDER$IMAGENAME$SIDECARTYPE
-#         echo "Ollama worked on $IMAGENAME"
-#     else
-#         echo "Ollama didn't work on $IMAGENAME"
-#     fi
-# }
+        json_annotation="{\"Annotation\": {\"Source\": \"Ollama:$ollama_model_version\", \"Test\": \"$final_output\"}}"
 
-# # Export the function so it can be used in subshells
-# export -f perform_annotation
-# export MODEL_VERSION
+        # Get the json file name from the image name
+        json_file="${IMAGENAME%.*}$SIDECARTYPE"
+        jq -s '.[0] * .[1]' <(echo "$json_annotation") "$json_file" > temp.json && mv temp.json "$json_file"
 
-# find "$directory" -type f -name "*.jpg" -exec bash -c 'perform_annotation "$0"' {} \;
+        echo "Ollama worked on $IMAGENAME"
+    else
+        echo "Ollama didn't work on $IMAGENAME"
+    fi
+}
+
+# Export the function so it can be used in subshells
+export -f perform_annotation
+export MODEL_VERSION
+
+find "$directory" -type f -name "*.jpg" -exec bash -c 'perform_annotation "$0"' {} \;

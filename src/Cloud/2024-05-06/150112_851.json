@@ -1,4 +1,8 @@
 {
+  "Annotation": {
+    "Source": "Ollama:",
+    "Test": " The picture is of a brown and white cat sitting on the ground next to a white fence. "
+  },
   "File Name": "150112_851.jpg",
   "Create Date": "2024-05-06 15:01:12.851+02:00",
   "Create Seconds Epoch": 1715000472.851,
