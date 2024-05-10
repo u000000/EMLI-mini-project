@@ -47,6 +47,8 @@ while true; do
         rm "$file.jpg"
         rm "$file.json"
 
+        logger -p local7.info -t transfer_files "Updated $json_file with $drone_copy."
+
     done
 
     sleep 1

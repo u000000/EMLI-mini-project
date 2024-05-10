@@ -1,5 +1,7 @@
 #!/bin/bash
 
+logger -p local7.info -t motion_detect "Starting motion detection script"
+
 # Set the path to the directory where the images will be stored
 directory="/home/emli/webcam-temp/"
 symlinkdir=${1:-"/home/emli/webcam/"}
@@ -16,7 +18,13 @@ firstimage=true
 while true
 do
     # take a picture
-    /home/emli/EMLI-mini-project/src/RPi/Camera/take_photo.sh Motion $directory false
+    photo=$(/home/emli/EMLI-mini-project/src/RPi/Camera/take_photo.sh Motion $directory false)
+    #check if the exit status of last command is not 0
+    if [ $? -ne 0 ]; then
+        echo "Could not acquire camera image. Continuing..."
+        sleep 1
+        continue
+    fi
 
     if [ "$firstimage" = true ]; then
         firstimage=false
@@ -57,8 +65,6 @@ do
             ln -s /var/www/html/images/$create_date/$json1 $symlinkdir$create_date
             ln -s /var/www/html/images/$create_date/$image1 $symlinklogdir$create_date
             ln -s /var/www/html/images/$create_date/$json1 $symlinklogdir$create_date
-
-
 
         fi
     
