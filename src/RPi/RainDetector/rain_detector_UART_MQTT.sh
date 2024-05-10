@@ -1,6 +1,6 @@
 #!/bin/bash
 
-serial_port="/dev/ttyACM0"
+serial_port="/dev/pico_01"
 
 exec 3<> "$serial_port"
 

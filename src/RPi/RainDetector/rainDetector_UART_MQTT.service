@@ -1,0 +1,10 @@
+[Unit]
+Description=RainDetector UART MQTT
+
+[Service]
+Type=simple
+ExecStart=/home/emli/EMLI-mini-project/src/RPi/RainDetector/rain_detector_UART_MQTT.sh
+
+
+[Install]
+WantedBy=multi-user.target

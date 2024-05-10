@@ -1,0 +1,10 @@
+[Unit]
+Description=RainDetector logic
+
+[Service]
+Type=simple
+ExecStart=/home/emli/EMLI-mini-project/src/RPi/RainDetector/rain_detector_logic.sh
+
+
+[Install]
+WantedBy=multi-user.target
