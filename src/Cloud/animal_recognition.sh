@@ -1,10 +1,11 @@
 #!/bin/bash
 
-img64=$(base64 -w 0 /home/u000000/2_Semester/EMLI-mini-project/src/RPi/Cloud/2024-05-06/150112_851.jpg)
+img64=$(base64 -w 0 /home/lars/Desktop/minion.jpg)
 
 output=$(curl http://localhost:11434/api/generate -d '{ "model": "llava", "prompt":"What is in this picture?", "images": ["'$img64'"]}')
 
-echo $output
+final_output=$(echo "$output" | jq -r '.response' | tr -d '\n')
+echo "$final_output"
 
 
 # perform_annotation() {
