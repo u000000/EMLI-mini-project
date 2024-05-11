@@ -50,7 +50,8 @@ do
         if [ "$output" == "Motion detected" ]; then
             echo "Motion detected"
             #get corresponding json
-            json1=${image1::-4}".json"
+            filename=${image1::-4}
+            json1="$filename.json"
             dirjson1=$directory$json1
             #from json read the Create Date
             create_date=$(cat $dirjson1 | grep "Create Date" | awk '{print $3}' | sed 's/\"//g')
@@ -65,6 +66,9 @@ do
             ln -s /var/www/html/images/$create_date/$json1 $symlinkdir$create_date
             ln -s /var/www/html/images/$create_date/$image1 $symlinklogdir$create_date
             ln -s /var/www/html/images/$create_date/$json1 $symlinklogdir$create_date
+
+            #log the motion detected
+            logger -p local7.info -t motion_detect "Trigger: Motion saved to /var/www/html/images/$filename.*"
 
         fi
     
