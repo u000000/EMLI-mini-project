@@ -1,7 +1,7 @@
 #!/bin/bash
 
-directory="${1:-"/home/u000000/2_Semester/EMLI-mini-project/src/Cloud"}"
-directorygit="${2:-"/home/u000000/2_Semester/EMLI-mini-project/src/Cloud"}"
+directory="${1:-"/home/u000000/Offload_to_cloud"}"
+directorygit="${2:-"/home/u000000/2_Semester/EMLI-mini-project/images_to_cloud"}"
 model_version="${3:-"llava:7b"}"
 
 ollama run $model_version &
