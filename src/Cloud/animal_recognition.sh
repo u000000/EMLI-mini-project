@@ -1,7 +1,8 @@
 #!/bin/bash
 
 directory="${1:-"/home/u000000/2_Semester/EMLI-mini-project/src/Cloud"}"
-model_version="${2:-"llava:7b"}"
+directorygit="${2:-"/home/u000000/2_Semester/EMLI-mini-project/src/Cloud"}"
+model_version="${3:-"llava:7b"}"
 
 ollama run $model_version &
 
@@ -15,6 +16,7 @@ perform_annotation() {
 
     if [ $? -eq 0 ]; then
         final_output=$(echo $output | jq -r '.response' | tr -d '\n')
+        echo "Ollama output: $final_output"
 
         json_annotation="{\"Annotation\": {\"Source\": \"Ollama:$ollama_model_version\", \"Test\": \"$final_output\"}}"
 
@@ -23,6 +25,7 @@ perform_annotation() {
         jq -s '.[0] * .[1]' <(echo "$json_annotation") "$json_file" > temp.json && mv temp.json "$json_file"
 
         echo "Ollama worked on $IMAGENAME"
+        
     else
         echo "Ollama didn't work on $IMAGENAME"
     fi
@@ -33,3 +36,14 @@ export -f perform_annotation
 export MODEL_VERSION
 
 find "$directory" -type f -name "*.jpg" -exec bash -c 'perform_annotation "$0"' {} \;
+
+echo "All images have been annotated."
+
+mv -n $directory* $directorygit
+
+mkdir $directory
+
+bash /home/lars/Documents/Emli/Exam/EMLI-mini-project/src/Cloud/push_json.sh $directorygit
+
+
+
