@@ -1,0 +1,13 @@
+{
+  "Annotation": {
+    "Source": "Ollama:",
+    "Test": " The picture shows a vast savannah with grassy plains, small trees, and a meandering river. "
+  },
+  "File Name": "111119_049.jpg",
+  "Create Date": "2024-05-11 11:11:19.049+02:00",
+  "Create Seconds Epoch": 1715418679.049,
+  "Trigger": "Motion",
+  "Subject Distance": 0.4992511233,
+  "Exposure Time": "1/52",
+  "ISO": 113
+}

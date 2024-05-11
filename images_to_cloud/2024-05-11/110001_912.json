@@ -1,0 +1,13 @@
+{
+  "Annotation": {
+    "Source": "Ollama:",
+    "Test": " A zebra grazing in a grassy field with a dramatic sky featuring rays of light. "
+  },
+  "File Name": "110001_912.jpg",
+  "Create Date": "2024-05-11 11:00:01.912+02:00",
+  "Create Seconds Epoch": 1715418001.912,
+  "Trigger": "Time",
+  "Subject Distance": 0.6489292667,
+  "Exposure Time": "1/53",
+  "ISO": 113
+}

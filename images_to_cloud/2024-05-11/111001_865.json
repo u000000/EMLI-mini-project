@@ -1,0 +1,13 @@
+{
+  "Annotation": {
+    "Source": "Ollama:",
+    "Test": " A sea lion sits on a rock, looking into the distance. "
+  },
+  "File Name": "111001_865.jpg",
+  "Create Date": "2024-05-11 11:10:01.865+02:00",
+  "Create Seconds Epoch": 1715418601.865,
+  "Trigger": "Time",
+  "Subject Distance": 0.6711409396,
+  "Exposure Time": "1/63",
+  "ISO": 114
+}

@@ -1,0 +1,13 @@
+{
+  "Annotation": {
+    "Source": "Ollama:",
+    "Test": " A majestic lion standing in a grassy field. "
+  },
+  "File Name": "110703_889.jpg",
+  "Create Date": "2024-05-11 11:07:03.889+02:00",
+  "Create Seconds Epoch": 1715418423.889,
+  "Trigger": "Motion",
+  "Subject Distance": 0.5924170616,
+  "Exposure Time": "1/44",
+  "ISO": 113
+}

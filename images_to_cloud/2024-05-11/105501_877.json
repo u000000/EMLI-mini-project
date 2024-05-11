@@ -1,0 +1,13 @@
+{
+  "Annotation": {
+    "Source": "Ollama:",
+    "Test": " A large, gray elephant stands in a dry grass field with mountains in the distance. "
+  },
+  "File Name": "105501_877.jpg",
+  "Create Date": "2024-05-11 10:55:01.877+02:00",
+  "Create Seconds Epoch": 1715417701.877,
+  "Trigger": "Time",
+  "Subject Distance": 0.5515719801,
+  "Exposure Time": "1/45",
+  "ISO": 113
+}
