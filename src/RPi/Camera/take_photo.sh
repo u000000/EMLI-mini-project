@@ -48,13 +48,19 @@ SIDECARTYPE=".json"
 rpicam-jpeg -o $FOLDER$IMAGENAME$IMAGETYPE --width 640 --height 480 -t 1
 #check if the exit status of last command is not 0
 if [ $? -ne 0 ]; then
-  logger -p local7.info -t take_photo "Trigger: $TRIGGER could not aquire camera image."
+  #dont log if trigger is Motion
+  if [ "$TRIGGER" != "Motion" ]; then
+    logger -p local7.info -t take_photo "Trigger: $TRIGGER could not aquire camera image."
+  fi
   echo "Could not acquire camera image. Exiting..."
   exit 1
 fi
 
 echo "Saved new file at $FOLDER$IMAGENAME$IMAGETYPE"
-logger -p local7.info -t take_photo "Trigger: $TRIGGER saved to $FOLDER$IMAGENAME.*"
+if [ "$TRIGGER" != "Motion" ]; then
+  logger -p local7.info -t take_photo "Trigger: $TRIGGER saved to $FOLDER$IMAGENAME.*"
+fi
+
 
 #Date for timestamped json "2021-09-01 13:42:24.033+02:00"
 TIMESTAMP_JSON=$(date -d "$DATE_STRING"  +"%Y-%m-%d %H:%M:%S.$MS%:z")
