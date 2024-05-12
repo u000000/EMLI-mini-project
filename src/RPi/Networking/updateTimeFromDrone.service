@@ -2,6 +2,7 @@
 Description=Check if connected to drone and then update time from its ntp server
 After=network-online.target
 Wants=network-online.target
+User=emli
 
 [Service]
 Type=simple

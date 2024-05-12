@@ -1,6 +1,7 @@
 [Unit]
 Description=ExternalTrigger MQTT reciever
 After=mosquitto.service
+User=emli
 
 [Service]
 Type=simple

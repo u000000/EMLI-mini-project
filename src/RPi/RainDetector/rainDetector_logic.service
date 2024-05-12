@@ -1,5 +1,6 @@
 [Unit]
 Description=RainDetector logic
+User=emli
 
 [Service]
 Type=simple

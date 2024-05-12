@@ -1,7 +1,8 @@
 [Unit]
-Description=When connected to a wifi on if=wlo1 log the link quality in the mysql database 
+Description=When connected to a wifi on if=wlo1 log the link quality in the mysql database
 After=network-online.target
 Wants=network-online.target
+User=emli
 
 [Service]
 Type=simple

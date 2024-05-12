@@ -1,5 +1,6 @@
 [Unit]
 Description=RainDetector UART MQTT
+User=emli
 
 [Service]
 Type=simple
